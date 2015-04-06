@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+<title>Affikit</title>
+<link rel="stylesheet" href="materialize.min.css">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  padding: 16px 24px;
+  width: 360px;
+}
+
+/*dl*/.sheet {}
+.sheet > dt {
+  clear: left;
+  float: left;
+  width: 5rem;
+  line-height: 3rem;
+}
+.sheet > dd {
+  margin-bottom: 10px;
+  overflow: hidden;
+  line-height: 3rem;
+}
+.sheet > dd .textfield {
+  width: auto;
+  margin-bottom: 0;
+}
+
+.label {
+  font-size: 16px;
+  color: #333;
+}
+
+.item {
+  margin-right: 1em;
+}
+
+.result textarea {
+  height: 10rem;
+}
+</style>
+<script src="popup.js"></script>
+</head>
+<body>
+<form>
+  <dl class="sheet">
+    <dt class="label">Your Id:</dt>
+    <dd><input class="textfield" id="aid" type="text"></dd>
+    <dt class="label">Format:</dt>
+    <dd>
+      <span class="item">
+        <input class="with-gap" name="format" type="radio" id="html" value="html" checked />
+        <label for="html">HTML</label>
+      </span>
+      <span class="item">
+        <input class="with-gap" name="format" type="radio" id="md" value="md" />
+        <label for="md">Markdown</label>
+      </span>
+    </dd>
+  </dl>
+
+  <div class="result">
+    <textarea id="result" class="materialize-textarea" rows="10"></textarea>
+  </div>
+</form>
+</body>
+</html>
