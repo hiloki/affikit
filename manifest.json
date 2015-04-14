@@ -3,7 +3,10 @@
   "description": "Generate Associates HTML",
   "version": "0.1",
   "permissions": [
-    "tabs", "http://*/*", "https://*/*"
+    "tabs",
+    "http://www.amazon.co.jp/*",
+    "http://www.amazon.com/*",
+    "storage"
   ],
   "browser_action": {
       "default_title": "Affikit",

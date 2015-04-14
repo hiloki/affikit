@@ -1,44 +1,22 @@
+var data;
+
 chrome.extension.onMessage.addListener(function(request, sender) {
   if (request.action == 'getSource') {
-    var url,format,aid;
-    var data = request.source;
-
-    data.aid = getAid();
-    data.format = getFormat();
-
-    buildCode(data);
+    data = request.source;
   }
 });
 
-function getAid() {
-  var aid = document.getElementById('aid').value;
-  return aid;
-}
+document.addEventListener('DOMContentLoaded', function () {
+  var $aid = document.getElementById('aid');
+  var $formatHtml = document.getElementById('html');
+  var $formatMd = document.getElementById('md');
+  var $result = document.getElementById('result');
+  var $input = document.querySelectorAll('[data-input]');
+  var keys = {
+    aid: "aid",
+    format: "format"
+  };
 
-function getFormat() {
-  var format = document.querySelector ('input[name="format"]:checked').value;
-  return format;
-}
-
-function buildCode(data) {
-  var url = data.url + '/' + data.aid;
-  var title = data.title;
-  var format = data.format;
-  var code = null;
-
-  if (format == 'html') {
-    code = '<a href="' + url + '">' + title + '</a>';
-  } else if (format == 'md') {
-    code = '[' + title + '](' + url + ')';
-  }
-
-  result.value = code;
-
-  result.select();
-  document.execCommand("copy");
-}
-
-function generate() {
   chrome.tabs.executeScript(null, {
     file: "script.js"
   },function() {
@@ -46,19 +24,75 @@ function generate() {
     if (chrome.extension.lastError) {
       return;
     }
+
+    chrome.storage.sync.get(keys, function(items) {
+      if (!chrome.runtime.error) {
+        if (items.aid !== '') {
+          $aid.value = items.aid;
+        }
+        if (items.format == 'md') {
+          $formatMd.checked = true;
+        } else {
+          $formatHtml.checked = true;
+        }
+
+        var aid = getAid();
+        var format = getFormat();
+
+        data.aid = aid;
+        data.format = format;
+
+        buildCode(data);
+      }
+
+      Array.prototype.forEach.call($input, function(node) {
+        node.addEventListener('change', function(){
+
+          user = {
+            aid: getAid(),
+            format: getFormat()
+          }
+
+          data.aid = user.aid;
+          data.format = user.format;
+
+          chrome.storage.sync.set(user, function(){
+            buildCode(data);
+          });
+
+        })
+      });
+    });
+
   });
-}
 
-document.addEventListener('DOMContentLoaded', function () {
-  var result = document.getElementById('result');
-  var inputAid = document.getElementById('aid');
-  var radioHtml = document.getElementById('html');
-  var radioMd = document.getElementById('md');
+  function getAid() {
+    var aidVal = $aid.value;
+    return aidVal;
+  }
 
-  inputAid.addEventListener('change', generate);
-  radioHtml.addEventListener('change', generate);
-  radioMd.addEventListener('change', generate);
+  function getFormat() {
+    var formatVal = document.querySelector('input[name="format"]:checked').value;
+    return formatVal;
+  }
 
-  generate();
+  function buildCode(data) {
+    var url = data.url + '/' + data.aid;
+    var title = data.title;
+    var format = data.format;
+    var code = null;
 
+    if (format == 'html') {
+      code = '<a href="' + url + '">' + title + '</a>';
+    } else if (format == 'md') {
+      code = '[' + title + '](' + url + ')';
+    }
+
+    $result.value = code;
+
+    $result.select();
+    document.execCommand("copy");
+
+    console.log(code);
+  }
 });

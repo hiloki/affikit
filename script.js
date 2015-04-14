@@ -10,19 +10,16 @@ function amazon(){
 
   var image = 'http://ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&Format=_SL250_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&ASIN=' + pid;
 
-  var data = {
+  var source = {
     url: url,
     image: image,
     title: title
   };
 
-  return data;
+  return source;
 }
 
 chrome.extension.sendMessage({
   action: 'getSource',
   source: amazon()
 });
-
-// Amazon
-// http://www.amazon.co.jp/%aname&/dp/%aid&

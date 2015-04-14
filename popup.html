@@ -49,20 +49,19 @@ body {
 <form>
   <dl class="sheet">
     <dt class="label">Your Id:</dt>
-    <dd><input class="textfield" id="aid" type="text"></dd>
+    <dd><input class="textfield" id="aid" type="text" data-input></dd>
     <dt class="label">Format:</dt>
     <dd>
       <span class="item">
-        <input class="with-gap" name="format" type="radio" id="html" value="html" checked />
+        <input class="with-gap" name="format" type="radio" id="html" value="html" data-input>
         <label for="html">HTML</label>
       </span>
       <span class="item">
-        <input class="with-gap" name="format" type="radio" id="md" value="md" />
+        <input class="with-gap" name="format" type="radio" id="md" value="md" data-input>
         <label for="md">Markdown</label>
       </span>
     </dd>
   </dl>
-
   <div class="result">
     <textarea id="result" class="materialize-textarea" rows="10"></textarea>
   </div>
