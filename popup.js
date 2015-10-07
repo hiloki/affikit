@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function buildCode(data) {
-    var url = data.url + '/' + data.aid;
+    var url = data.url + '?tag=' + data.aid;
     var title = data.title;
     var format = data.format;
     var code = null;

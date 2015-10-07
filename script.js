@@ -10,8 +10,11 @@ function amazon(){
 
   var image = 'http://ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&Format=_SL250_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&ASIN=' + pid;
 
+  url = 'https://www.amazon.co.jp/dp/' + pid + '/';
+
   var source = {
     url: url,
+    pid: pid,
     image: image,
     title: title
   };

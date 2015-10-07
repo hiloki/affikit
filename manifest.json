@@ -1,7 +1,7 @@
 {
   "name": "Affikit",
   "description": "Generate Associates HTML",
-  "version": "0.1",
+  "version": "0.9",
   "permissions": [
     "tabs",
     "http://www.amazon.co.jp/*",
