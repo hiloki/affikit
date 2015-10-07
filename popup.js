@@ -17,6 +17,23 @@ document.addEventListener('DOMContentLoaded', function () {
     format: "format"
   };
 
+  Array.prototype.forEach.call($input, function(node) {
+    node.addEventListener('change', function(){
+
+      var user = {
+        aid: getAid(),
+        format: getFormat()
+      }
+
+      data.aid = user.aid;
+      data.format = user.format;
+
+      chrome.storage.sync.set(user, function(){
+        buildCode(data);
+      });
+    })
+  });
+
   chrome.tabs.executeScript(null, {
     file: "script.js"
   },function() {
@@ -44,26 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         buildCode(data);
       }
-
-      Array.prototype.forEach.call($input, function(node) {
-        node.addEventListener('change', function(){
-
-          user = {
-            aid: getAid(),
-            format: getFormat()
-          }
-
-          data.aid = user.aid;
-          data.format = user.format;
-
-          chrome.storage.sync.set(user, function(){
-            buildCode(data);
-          });
-
-        })
-      });
     });
-
   });
 
   function getAid() {
@@ -92,7 +90,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
     $result.select();
     document.execCommand("copy");
-
-    console.log(code);
   }
 });
