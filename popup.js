@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (items.aid !== '') {
           $aid.value = items.aid;
         }
+
         if (items.format == 'md') {
           $formatMd.checked = true;
         } else if (items.format == 'html') {
@@ -78,10 +79,16 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function buildCode(data) {
-    var url = data.url + '?tag=' + data.aid;
     var title = data.title;
     var format = data.format;
     var code = null;
+    var url;
+
+    if(data.aid) {
+      url = data.url + '?tag=' + data.aid;
+    } else {
+      url = data.url;
+    }
 
     if (format == 'html') {
       code = '<a href="' + url + '">' + title + '</a>';
