@@ -10,7 +10,7 @@
 }
 body {
   padding: 16px 24px;
-  width: 360px;
+  width: 480px;
 }
 
 /*dl*/.sheet {}
@@ -40,7 +40,7 @@ body {
 }
 
 .result textarea {
-  height: 10rem;
+  height: 5rem;
 }
 </style>
 <script src="popup.js"></script>
@@ -60,10 +60,14 @@ body {
         <input class="with-gap" name="format" type="radio" id="md" value="md" data-input>
         <label for="md">Markdown</label>
       </span>
+      <span class="item">
+        <input class="with-gap" name="format" type="radio" id="url" value="url" data-input>
+        <label for="url">URL</label>
+      </span>
     </dd>
   </dl>
   <div class="result">
-    <textarea id="result" class="materialize-textarea" rows="10"></textarea>
+    <textarea id="result" class="materialize-textarea" rows="5"></textarea>
   </div>
 </form>
 </body>

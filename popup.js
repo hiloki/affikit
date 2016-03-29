@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var $aid = document.getElementById('aid');
   var $formatHtml = document.getElementById('html');
   var $formatMd = document.getElementById('md');
+  var $formatUrl = document.getElementById('url');
   var $result = document.getElementById('result');
   var $input = document.querySelectorAll('[data-input]');
   var keys = {
@@ -49,8 +50,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         if (items.format == 'md') {
           $formatMd.checked = true;
-        } else {
+        } else if (items.format == 'html') {
           $formatHtml.checked = true;
+        } else {
+          $formatUrl.checked = true;
         }
 
         var aid = getAid();
@@ -84,6 +87,8 @@ document.addEventListener('DOMContentLoaded', function () {
       code = '<a href="' + url + '">' + title + '</a>';
     } else if (format == 'md') {
       code = '[' + title + '](' + url + ')';
+    } else {
+      code = url;
     }
 
     $result.value = code;
