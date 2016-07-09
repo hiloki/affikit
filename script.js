@@ -6,7 +6,15 @@ function amazon(){
   // 商品のIDを抽出
   var pid = path.pop();
   // 商品タイトルを抽出
-  var title = decodeURIComponent(document.getElementById('productTitle').textContent);
+  var title;
+  var productTitle = document.getElementById('productTitle');
+  var ebookProductTitle = document.getElementById('ebooksProductTitle');
+
+  if(ebookProductTitle !== null) {
+    title = decodeURIComponent(ebookProductTitle.textContent);
+  } else {
+    title = decodeURIComponent(productTitle.textContent);
+  }
 
   // タイトル前後に空白があればトル
   title = title.replace(/(^\s+)|(\s+$)/g, "");
