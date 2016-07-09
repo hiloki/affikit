@@ -6,6 +6,8 @@
     "tabs",
     "http://www.amazon.co.jp/*",
     "http://www.amazon.com/*",
+    "https://www.amazon.co.jp/*",
+    "https://www.amazon.com/*",
     "storage"
   ],
   "browser_action": {

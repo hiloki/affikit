@@ -8,6 +8,9 @@ function amazon(){
   // 商品タイトルを抽出
   var title = decodeURIComponent(document.getElementById('productTitle').textContent);
 
+  // タイトル前後に空白があればトル
+  title = title.replace(/(^\s+)|(\s+$)/g, "");
+
   url = 'https://www.amazon.co.jp/dp/' + pid + '/';
 
   var source = {
@@ -15,6 +18,8 @@ function amazon(){
     pid: pid,
     title: title
   };
+
+  console.log(source);
 
   return source;
 }
